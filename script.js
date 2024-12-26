@@ -174,7 +174,7 @@ function clear() {
     LastOperationBox.textContent = "";
     CurrentOperator = "";
     OperatorActive = false;
-    DisplayBox.textContent = "";
+    DisplayBox.textContent = "0";
 }
 
 window.onload = () => {
