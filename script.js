@@ -18,8 +18,8 @@ const multiply = (a,b) => a*b;
 const divide = (a, b) => a/b;
 
 const operate = (operator, a, b) => {
-    a = Number(a);
-    b = Number(b);
+    a = parseFloat(a);
+    b = parseFloat(b);
     switch(operator)
     {
         case '+':
@@ -85,18 +85,16 @@ function UpdateDigits(num) {
 
 //Activate when an operator button is clicked
 function UpdateCurrentOperator(operator) {
+    //if the user do operation after operation, the OperatorActive is always active.
     if(OperatorActive) //Runs when user do continuous operator calls
     {
         LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB}`;
         numA = operate(CurrentOperator, numA, numB);
         numB = "";
-        operatorActive = false;
         DisplayBox.textContent = numA;
-        
     }
     //First operator call after a "fresh state", 
     //when user explicitly click = buttons
-    //or when another operator calls complete the previous operation. 
     else if(OperatorActive == false) 
     {
         OperatorActive = true;
@@ -112,7 +110,6 @@ function UpdateResult() {
     numB = "";
     OperatorActive = false;
     DisplayBox.textContent = numA;
-    
 }
 
 //Clear the calculator
@@ -123,7 +120,6 @@ function clear() {
     CurrentOperator = "";
     OperatorActive = false;
     DisplayBox.textContent = "";
-    ResultBox.textContent = 0;
 }
 
 window.onload = () => {
