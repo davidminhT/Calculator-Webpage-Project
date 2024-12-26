@@ -12,7 +12,7 @@ const ButtonSetup = [
     ["7", "8", "9", "×"], 
     ["4", "5", "6", "−"],
     ["1", "2", "3", "+"],
-    ["0", ".", "="]
+    [".", "0", "="]
 ]
 
 //Operation
@@ -62,6 +62,8 @@ function setupButtons() {
             else
                 setupOperatorButton(RowDivs[i], ButtonSetup[i][j]);
         }
+        //Make bottom row layered over the top row
+        RowDivs[i].style.zIndex = i+1;
     }
 }
 
@@ -84,7 +86,8 @@ function setupOperatorButton(parent, operator) {
     Edge.className = "edge";
     Button.appendChild(Edge);
     
-
+    if(operator == "=")
+        Button.id = "Equal";
     Button.addEventListener("click", () => {
         if("+−×÷%".includes(Button.textContent))
         {
