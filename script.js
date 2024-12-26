@@ -68,8 +68,23 @@ function setupButtons() {
 //Setup the operator buttons
 function setupOperatorButton(parent, operator) {
     const Button = document.createElement("button");
-    Button.className = "OperatorButton";
-    Button.textContent = operator;
+    Button.className = "OperatorButton";;
+
+    //Button styling childs
+    const FrontText = document.createElement("span");
+    FrontText.className = "front text";
+    FrontText.textContent = operator;
+    FrontText.style.color = "red";
+    FrontText.style.background = "rgb(66, 62, 62";
+    Button.appendChild(FrontText);
+    const Shadow = document.createElement("span");
+    Shadow.className = "shadow";
+    Button.appendChild(Shadow);
+    const Edge = document.createElement("span");
+    Edge.className = "edge";
+    Button.appendChild(Edge);
+    
+
     Button.addEventListener("click", () => {
         if("+−×÷%".includes(Button.textContent))
         {
@@ -94,7 +109,21 @@ function setupOperatorButton(parent, operator) {
 function setupDigitButton(parent, digit) {
     const Button = document.createElement("button");
     Button.className = "DigitButton";
-    Button.textContent = digit;
+    
+    //Button styling childs
+    const FrontText = document.createElement("span");
+    FrontText.className = "front text";
+    FrontText.textContent = digit;
+    Button.appendChild(FrontText);
+    const Shadow = document.createElement("span");
+    Shadow.className = "shadow";
+    Button.appendChild(Shadow);
+    const Edge = document.createElement("span");
+    Edge.className = "edge";
+    Button.appendChild(Edge);
+    
+
+    Button.style.color = "white";
     Button.addEventListener("click", () => UpdateDigits(Button.textContent));
     parent.appendChild(Button);
 }
