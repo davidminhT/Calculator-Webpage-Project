@@ -6,7 +6,7 @@ html {
 html, body {
     height: 100%;
     overflow: hidden;
-    font-family: "Pixelify Sans", serif;
+    font-family: "Roboto Mono", serif;
 }
 
 body {
@@ -20,6 +20,8 @@ body {
     display: flex;
     flex-direction: column;
     background-color: rgb(224, 224, 224);
+    background-image: linear-gradient(to bottom, rgb(66, 62, 62) 30%,
+                        rgba(0,0,0,0) 30%);
     border-radius: 30px;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.37), 
                     0px 12px 0px 15px rgba(116, 103, 103, 0.863), 
@@ -30,12 +32,29 @@ body {
     align-items: center;
 }
 
-#ButtonsBox {
+#DisplayScreen {
     display: flex;
-    flex-wrap: wrap;
-    height: 90%;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: rgb(86, 143, 33);
+    box-shadow: inset 0px 0px 10px black, 0px 0px 5px black;
+    height: 15%;
+    width: 90%;
+    border-radius: 12px;
+}
+
+#DisplayBox {
+    text-align: right;
+    font-size: 60px;
+    text-shadow: -2px -2px 5px rgb(152, 185, 145);
+    margin-right: 8%;
+}
+
+#ButtonsBox {
+    height: 70%;
     width: 90%;
 }
+
 
 
 
