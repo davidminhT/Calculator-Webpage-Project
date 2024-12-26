@@ -200,7 +200,7 @@ function ToggleSign()
 {
     if(!OperatorActive)
     {
-        numA = -numA;
+        numA = (-parseFloat(numA)).toString();
         DisplayBox.textContent = numA;
     }
 }
