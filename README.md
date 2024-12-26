@@ -1,6 +1,6 @@
 # Fancy-Calculator
 ### Project Showcase
-![Screenshot 2024-12-26 022030](https://github.com/user-attachments/assets/ab3fc2ba-c3ab-4c88-ba51-432e05175707)
+![image](https://github.com/user-attachments/assets/078ed886-0b2e-4e26-ad17-e03ce948dcbe)
 
 ### Assignments
 - Make a working calculator website with an output display, digit buttons, and operator buttons such as +, -, =, and more. 
