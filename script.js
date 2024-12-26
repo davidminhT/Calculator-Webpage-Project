@@ -1,5 +1,5 @@
-const ButtonBox = document.querySelector("#ButtonsBox");
-const DigitBox = document.querySelector("#DigitsBox");
+const OperatorsBox = document.querySelector("#OperatorsBox");
+const DigitsBox = document.querySelector("#DigitsBox");
 const DisplayBox = document.querySelector("#DisplayBox");
 const LastOperationBox = document.querySelector("#LastOperationBox")
 
@@ -65,7 +65,7 @@ function setupOperatorButtons() {
             else
                 clear();
         });
-        ButtonBox.appendChild(Button);
+        OperatorsBox.appendChild(Button);
     }
 }
 
@@ -76,7 +76,7 @@ function setupDigitButtons() {
         Button.className = "DigitButton";
         Button.textContent = i;
         Button.addEventListener("click", () => UpdateDigits(Button.textContent));
-        DigitBox.appendChild(Button);
+        DigitsBox.appendChild(Button);
     }
 }
 
@@ -98,10 +98,18 @@ function UpdateCurrentOperator(operator) {
     //if the user do operation after operation, the OperatorActive is always active.
     if(OperatorActive) //Runs when user do continuous operator calls
     {
-        LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB} =`;
-        numA = operate(CurrentOperator, numA, numB);
-        numB = "";
-        DisplayBox.textContent = numA;
+        if(numB !== "")
+        {
+            LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB} =`;
+            numA = operate(CurrentOperator, numA, numB);
+            numB = "";
+            DisplayBox.textContent = numA;
+        }
+        else if(numB === "")
+        {
+            DisplayBox.textContent = DisplayBox.textContent
+                    .replace(` ${CurrentOperator} `, '');
+        }
     }
     //First operator call after a "fresh state", 
     //when user explicitly click = buttons
@@ -109,7 +117,7 @@ function UpdateCurrentOperator(operator) {
     {
         OperatorActive = true;
     }
-    DisplayBox.textContent += operator;
+    DisplayBox.textContent += ` ${operator} `;
     CurrentOperator = operator;
 }
 
@@ -131,21 +139,29 @@ function AddDecimal()
 
 function ToggleSign()
 {
-    if(OperatorActive)
-    {
-        
-    }
-    //If numA previously has no decimal place then run
-    else
+    if(!OperatorActive)
     {
         numA = -numA;
         DisplayBox.textContent = numA;
     }
 }
+
 //Update the result activates when pressing =
 function UpdateResult() {
+    //handle case where qual opeation if user haven't entered 
+    //anything after operator is activated
+    if(numB == "") 
+        CurrentOperator = ""; 
+
+    //output last successful operation
     LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB} =`;
-    numA = operate(CurrentOperator, numA, numB);
+    
+    //numB is valid and an operation IS being carried out
+    if(CurrentOperator && numB !== "")
+        //set numA to result. 
+        numA = operate(CurrentOperator, numA, numB);
+
+    //Reset numB and OperatorActive. Output numA.
     numB = "";
     OperatorActive = false;
     DisplayBox.textContent = numA;
