@@ -1,5 +1,3 @@
-const OperatorsBox = document.querySelector("#OperatorsBox");
-const DigitsBox = document.querySelector("#DigitsBox");
 const DisplayBox = document.querySelector("#DisplayBox");
 const LastOperationBox = document.querySelector("#LastOperationBox")
 const ButtonsBox = document.querySelector("#ButtonsBox");
@@ -9,6 +7,14 @@ var numB = ""; //Current numB
 var CurrentOperator= ""; //Current Operator
 var OperatorActive = false;
 
+const ButtonSetup = [
+    ["AC", "+/−", "%", "÷"],
+    ["7", "8", "9", "×"], 
+    ["4", "5", "6", "−"],
+    ["1", "2", "3", "+"],
+    ["0", ".", "="]
+]
+
 //Operation
 const add = (a, b) => a+b;
 
@@ -17,6 +23,8 @@ const subtract = (a, b) => a-b;
 const multiply = (a,b) => a*b;
 
 const divide = (a, b) => a/b;
+
+const modulo = (a, b) => a%b;
 
 const operate = (operator, a, b) => {
     a = parseFloat(a);
@@ -36,23 +44,34 @@ const operate = (operator, a, b) => {
         case '÷':
             result = divide(a, b);
             break;
+        case '%':
+            result = modulo(a, b);
+            break;
     }
     return Number.isInteger(result) ? result : Math.round(result * 100) / 100;
 };
 
 function setupButtons() {
-    const RowDiv = ButtonsBox.querySelectorAll(".row");
-
+    const RowDivs = Array.from(ButtonsBox.querySelectorAll(".row"));
+    for(let i = 0; i < ButtonSetup.length; i++)
+    {
+        for(let j = 0; j < ButtonSetup[i].length; j++)
+        {
+            if("0123456789".includes(ButtonSetup[i][j]))
+                setupDigitButton(RowDivs[i], ButtonSetup[i][j]);
+            else
+                setupOperatorButton(RowDivs[i], ButtonSetup[i][j]);
+        }
+    }
 }
 
 //Setup the operator buttons
-const operators = ['+/−', '.', '+', '−', '×', '÷', '=', 'AC']
 function setupOperatorButton(parent, operator) {
     const Button = document.createElement("button");
     Button.className = "OperatorButton";
     Button.textContent = operator;
     Button.addEventListener("click", () => {
-        if("+−×÷".includes(Button.textContent))
+        if("+−×÷%".includes(Button.textContent))
         {
             if(numA != "")
                 UpdateCurrentOperator(Button.textContent);
@@ -73,12 +92,11 @@ function setupOperatorButton(parent, operator) {
 }
 
 function setupDigitButton(parent, digit) {
-        const Button = document.createElement("button");
-        Button.className = "DigitButton";
-        Button.textContent = digits;
-        Button.addEventListener("click", () => UpdateDigits(Button.textContent));
-        RowDiv.appendChild(Button);
-        DigitsBox.appendChild(RowDiv);
+    const Button = document.createElement("button");
+    Button.className = "DigitButton";
+    Button.textContent = digit;
+    Button.addEventListener("click", () => UpdateDigits(Button.textContent));
+    parent.appendChild(Button);
 }
 
 function UpdateDigits(num) {
@@ -179,4 +197,5 @@ function clear() {
 }
 
 window.onload = () => {
+    setupButtons();
 };
