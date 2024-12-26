@@ -1,6 +1,7 @@
 # Fancy-Calculator
 ### Project Showcase
-![image](https://github.com/user-attachments/assets/10f4b61d-41a1-49f0-bf98-9857c9e31ae9)
+![image](https://github.com/user-attachments/assets/9f8c2715-376e-4c90-8d47-9e0969e07c10)
+
 
 
 ### Assignments
