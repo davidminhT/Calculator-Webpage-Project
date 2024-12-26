@@ -1,6 +1,7 @@
 const DisplayBox = document.querySelector("#DisplayBox");
 const LastOperationBox = document.querySelector("#LastOperationBox")
 const ButtonsBox = document.querySelector("#ButtonsBox");
+const ClickSound = new Audio('SFX/click.wav');
 
 var numA = ""; //Current numA
 var numB = ""; //Current numB 
@@ -89,6 +90,7 @@ function setupOperatorButton(parent, operator) {
     if(operator == "=")
         Button.id = "Equal";
     Button.addEventListener("click", () => {
+        ClickSound.play();
         if("+−×÷%".includes(Button.textContent))
         {
             if(numA != "")
@@ -127,7 +129,10 @@ function setupDigitButton(parent, digit) {
     
 
     Button.style.color = "white";
-    Button.addEventListener("click", () => UpdateDigits(Button.textContent));
+    Button.addEventListener("click", () => {
+        ClickSound.play();
+        UpdateDigits(Button.textContent); 
+    });
     parent.appendChild(Button);
 }
 
