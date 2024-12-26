@@ -32,6 +32,7 @@ body {
     width: 80%;
 }
 a {
+    margin-top: 7px;
     margin-left: 30%;
     width: 10%;
 }
@@ -63,7 +64,8 @@ a {
     align-items: center;
     transform: rotateX(8deg);
     z-index: 5;
-    padding-bottom: 15px;
+    padding-bottom: 1%;
+    margin-bottom: 3%;
 }
 
 #DisplayScreen {
