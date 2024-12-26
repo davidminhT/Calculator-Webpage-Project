@@ -80,7 +80,7 @@ function UpdateDigits(num) {
     else if(OperatorActive == true) //if operator is clicked
     {
         numB += String(num);
-        DisplayBox.textContent += numB;
+        DisplayBox.textContent += String(num);
     }
 }
 
