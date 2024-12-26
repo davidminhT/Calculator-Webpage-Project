@@ -20,21 +20,27 @@ const divide = (a, b) => a/b;
 const operate = (operator, a, b) => {
     a = parseFloat(a);
     b = parseFloat(b);
+    let result;
     switch(operator)
     {
         case '+':
-            return add(a, b);
-        case '-':
-            return subtract(a, b);
-        case '*':
-            return multiply(a, b);
-        case '/':
-            return divide(a, b);
+            result = add(a, b);
+            break;
+        case '−':
+            result = subtract(a, b);
+            break;
+        case '×':
+            result = multiply(a, b);
+            break;
+        case '÷':
+            result = divide(a, b);
+            break;
     }
+    return Number.isInteger(result) ? result : Math.round(result * 100) / 100;
 };
 
 //Setup the operator buttons
-const operators = ['+', '-', '*', '/', '=', 'clear']
+const operators = ['.', '+', '−', '×', '÷', '=', 'clear']
 function setupOperatorButtons() {
     for(let operator of operators)
     {   
@@ -42,13 +48,19 @@ function setupOperatorButtons() {
         Button.className = "OperatorButton";
         Button.textContent = operator;
         Button.addEventListener("click", () => {
-            if("+-*/".includes(Button.textContent))
+            if("+−×÷".includes(Button.textContent))
             {
-                UpdateCurrentOperator(Button.textContent);
+                if(numA != "")
+                    UpdateCurrentOperator(Button.textContent);
             }
             else if(Button.textContent == "=")
             {
-                UpdateResult();
+                if(numA != "")
+                    UpdateResult();
+            }
+            else if(Button.textContent == ".")
+            {
+                AddDecimal();
             }
             else
             {
@@ -88,7 +100,7 @@ function UpdateCurrentOperator(operator) {
     //if the user do operation after operation, the OperatorActive is always active.
     if(OperatorActive) //Runs when user do continuous operator calls
     {
-        LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB}`;
+        LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB} =`;
         numA = operate(CurrentOperator, numA, numB);
         numB = "";
         DisplayBox.textContent = numA;
@@ -103,9 +115,24 @@ function UpdateCurrentOperator(operator) {
     CurrentOperator = operator;
 }
 
+//Add Decimal after current number.
+function AddDecimal()
+{
+    if(OperatorActive && !(numB.includes('.')))
+    {
+        numB +='.';
+        DisplayBox.textContent += '.';
+    }
+    //If numA previously has no decimal place then run
+    else if(!(numA.includes('.'))) 
+    {
+        numA += '.';
+        DisplayBox.textContent = numA;
+    }
+}
 //Update the result activates when pressing =
 function UpdateResult() {
-    LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB}`;
+    LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB} =`;
     numA = operate(CurrentOperator, numA, numB);
     numB = "";
     OperatorActive = false;
