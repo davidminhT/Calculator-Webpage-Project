@@ -2,6 +2,7 @@ const OperatorsBox = document.querySelector("#OperatorsBox");
 const DigitsBox = document.querySelector("#DigitsBox");
 const DisplayBox = document.querySelector("#DisplayBox");
 const LastOperationBox = document.querySelector("#LastOperationBox")
+const ButtonsBox = document.querySelector("#ButtonsBox");
 
 var numA = ""; //Current numA
 var numB = ""; //Current numB 
@@ -39,55 +40,45 @@ const operate = (operator, a, b) => {
     return Number.isInteger(result) ? result : Math.round(result * 100) / 100;
 };
 
-//Setup the operator buttons
-const operators = ['+/−', '.', '+', '−', '×', '÷', '=', 'AC']
-function setupOperatorButtons() {
-    for(let operator of operators)
-    {   
-        const Button = document.createElement("button");
-        Button.className = "OperatorButton";
-        Button.textContent = operator;
-        Button.addEventListener("click", () => {
-            if("+−×÷".includes(Button.textContent))
-            {
-                if(numA != "")
-                    UpdateCurrentOperator(Button.textContent);
-            }
-            else if(Button.textContent == "=")
-            {
-                if(numA != "")
-                    UpdateResult();
-            }
-            else if(Button.textContent == ".")
-                AddDecimal();
-            else if(Button.textContent == "+/−")
-                ToggleSign();
-            else
-                clear();
-        });
-        OperatorsBox.appendChild(Button);
-    }
+function setupButtons() {
+    const RowDiv = ButtonsBox.querySelectorAll(".row");
+
 }
 
-const digits = [
-    [7, 8, 9],
-    [4, 5, 6],
-    [1, 2, 3],
-    [0]
-];
-function setupDigitButtons() {
-    digits.forEach(row => {
-        const RowDiv = document.createElement("div");
-        RowDiv.className = "RowDiv";
-        row.forEach(digits => {
-            const Button = document.createElement("button");
-            Button.className = "DigitButton";
-            Button.textContent = digits;
-            Button.addEventListener("click", () => UpdateDigits(Button.textContent));
-            RowDiv.appendChild(Button);
-        });
+//Setup the operator buttons
+const operators = ['+/−', '.', '+', '−', '×', '÷', '=', 'AC']
+function setupOperatorButton(parent, operator) {
+    const Button = document.createElement("button");
+    Button.className = "OperatorButton";
+    Button.textContent = operator;
+    Button.addEventListener("click", () => {
+        if("+−×÷".includes(Button.textContent))
+        {
+            if(numA != "")
+                UpdateCurrentOperator(Button.textContent);
+        }
+        else if(Button.textContent == "=")
+        {
+            if(numA != "")
+                UpdateResult();
+        }
+        else if(Button.textContent == ".")
+            AddDecimal();
+        else if(Button.textContent == "+/−")
+            ToggleSign();
+        else
+            clear();
+    });
+    parent.appendChild(Button);
+}
+
+function setupDigitButton(parent, digit) {
+        const Button = document.createElement("button");
+        Button.className = "DigitButton";
+        Button.textContent = digits;
+        Button.addEventListener("click", () => UpdateDigits(Button.textContent));
+        RowDiv.appendChild(Button);
         DigitsBox.appendChild(RowDiv);
-    })
 }
 
 function UpdateDigits(num) {
