@@ -59,9 +59,11 @@ a {
                     
     height: 65vh;
     width: 55vh;
+    min-width: 500px;
+    min-height: 600px;
     justify-content: space-around;
     align-items: center;
-    transform: rotateX(8deg);
+    transform: rotateX(10deg);
     z-index: 5;
     padding-bottom: 1%;
     margin-bottom: 3%;
