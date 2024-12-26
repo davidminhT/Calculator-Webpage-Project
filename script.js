@@ -91,12 +91,13 @@ function setupOperatorButton(parent, operator) {
     Button.addEventListener("click", () => {
         if("+−×÷%".includes(Button.textContent))
         {
-            if(numA != "")
+            //Bug Fix: Error where if numA is 0 (Number) then it won't fire act as if numA is "". != changed to !==.
+            if(numA !== "") 
                 UpdateCurrentOperator(Button.textContent);
         }
         else if(Button.textContent == "=")
         {
-            if(numA != "")
+            if(numA !== "")
                 UpdateResult();
         }
         else if(Button.textContent == ".")
@@ -152,7 +153,6 @@ function UpdateDigits(num) {
 
 //Activate when an operator button is clicked
 function UpdateCurrentOperator(operator) {
-    console.log("all");
     //if the user do operation after operation, the OperatorActive is always active.
     if(OperatorActive) //Runs when user do continuous operator calls
     {
