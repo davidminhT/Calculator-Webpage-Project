@@ -87,16 +87,20 @@ function UpdateDigits(num) {
 }
 
 function UpdateCurrentOperator(operator) {
-    if(OperatorActive == true)
+    if(OperatorActive)
     {
-        UpdateResult();
-        console.log(OperatorActive)
-        return;
+        numA = operate(CurrentOperator, numA, numB);
+        ResultBox.textContent = numA;
+        DisplayBox.textContent = "";
+        numB = "";
+        operatorActive = false;
     }
-    OperatorActive = true;
-    DisplayBox.textContent = "";
+    else if(OperatorActive == false)
+    {
+        OperatorActive = true;
+        DisplayBox.textContent = "";
+    }
     CurrentOperator = operator;
-    console.log(OperatorActive)
 }
 
 function UpdateResult() {
