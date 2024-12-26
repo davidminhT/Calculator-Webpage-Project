@@ -1,11 +1,10 @@
-const ButtonBox = document.querySelector("#ButtonBox");
-const DigitBox = document.querySelector("#DigitBox");
+const ButtonBox = document.querySelector("#ButtonsBox");
+const DigitBox = document.querySelector("#DigitsBox");
 const DisplayBox = document.querySelector("#DisplayBox");
 const LastOperationBox = document.querySelector("#LastOperationBox")
 
 var numA = ""; //Current numA
-var numB = ""; //Current numB
-var CurrentResult = ""; //Current result
+var numB = ""; //Current numB 
 var CurrentOperator= ""; //Current Operator
 var OperatorActive = false;
 
@@ -84,15 +83,19 @@ function UpdateDigits(num) {
     }
 }
 
+//Activate when an operator button is clicked
 function UpdateCurrentOperator(operator) {
-    if(OperatorActive)
+    if(OperatorActive) //Runs when user do continuous operator calls
     {
         numA = operate(CurrentOperator, numA, numB);
         numB = "";
         DisplayBox.textContent = numA;
         operatorActive = false;
     }
-    else if(OperatorActive == false)
+    //First operator call after a "fresh state", 
+    //when user explicitly click = buttons
+    //or when another operator calls complete the previous operation. 
+    else if(OperatorActive == false) 
     {
         OperatorActive = true;
     }
@@ -100,24 +103,25 @@ function UpdateCurrentOperator(operator) {
     CurrentOperator = operator;
 }
 
+//Update the result activates when pressing =
 function UpdateResult() {
     OperatorActive = false;
-    CurrentResult = operate(CurrentOperator, numA, numB);
-    numA = CurrentResult;
+    numA = operate(CurrentOperator, numA, numB);
     DisplayBox.textContent = numA;
     numB = "";
 }
 
+//Clear the calculator
 function clear() {
     numA = "";
     numB = "";
-    CurrentResult;
     CurrentOperator;
     OperatorActive = false;
     DisplayBox.textContent = "";
     ResultBox.textContent = 0;
 
 }
+
 window.onload = () => {
     setupOperatorButtons();
     setupDigitButtons();
