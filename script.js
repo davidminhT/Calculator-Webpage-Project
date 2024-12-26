@@ -167,7 +167,6 @@ function UpdateCurrentOperator(operator) {
         {
             DisplayBox.textContent = DisplayBox.textContent
                     .replace(` ${CurrentOperator} `, '');
-            OperatorActive = false;
         }
     }
     //First operator call after a "fresh state", 
