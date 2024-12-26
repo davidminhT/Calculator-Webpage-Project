@@ -11,3 +11,4 @@
 - Add other operator such as modulo (%).
 - Make the website look like a real calculator in a stylize 3d environment.
 - Make functions modulable. Try to reduce redundant code or setup.
+- Add sounds.
