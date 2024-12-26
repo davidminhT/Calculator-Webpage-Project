@@ -87,10 +87,12 @@ function UpdateDigits(num) {
 function UpdateCurrentOperator(operator) {
     if(OperatorActive) //Runs when user do continuous operator calls
     {
+        LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB}`;
         numA = operate(CurrentOperator, numA, numB);
         numB = "";
-        DisplayBox.textContent = numA;
         operatorActive = false;
+        DisplayBox.textContent = numA;
+        
     }
     //First operator call after a "fresh state", 
     //when user explicitly click = buttons
@@ -105,21 +107,23 @@ function UpdateCurrentOperator(operator) {
 
 //Update the result activates when pressing =
 function UpdateResult() {
-    OperatorActive = false;
+    LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB}`;
     numA = operate(CurrentOperator, numA, numB);
-    DisplayBox.textContent = numA;
     numB = "";
+    OperatorActive = false;
+    DisplayBox.textContent = numA;
+    
 }
 
 //Clear the calculator
 function clear() {
     numA = "";
     numB = "";
-    CurrentOperator;
+    LastOperationBox.textContent = "";
+    CurrentOperator = "";
     OperatorActive = false;
     DisplayBox.textContent = "";
     ResultBox.textContent = 0;
-
 }
 
 window.onload = () => {
