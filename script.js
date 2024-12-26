@@ -136,12 +136,16 @@ function setupDigitButton(parent, digit) {
 function UpdateDigits(num) {
     if(OperatorActive == false) //standard
     {
-        numA += String(num);
+        if(numA == '0') {
+            numA = num;
+        } else {numA += String(num);}
         DisplayBox.textContent = numA;
     }
     else if(OperatorActive == true) //if operator is clicked
     {
-        numB += String(num);
+        if(numB == '0') {
+            numB = num;
+        } else {numB += String(num);}
         DisplayBox.textContent += String(num);
     }
 }
@@ -155,7 +159,7 @@ function UpdateCurrentOperator(operator) {
         if(numB !== "")
         {   console.log("a")
             LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB} =`;
-            numA = operate(CurrentOperator, numA, numB);
+            numA = operate(CurrentOperator, numA, numB).toString();
             numB = "";
             DisplayBox.textContent = numA;
         }
@@ -214,7 +218,7 @@ function UpdateResult() {
     //numB is valid and an operation IS being carried out
     if(CurrentOperator && numB !== "")
         //set numA to result. 
-        numA = operate(CurrentOperator, numA, numB);
+        numA = operate(CurrentOperator, numA, numB).toString();
 
     //Reset numB and OperatorActive. Output numA.
     numB = "";
