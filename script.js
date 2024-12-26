@@ -90,9 +90,9 @@ function UpdateCurrentOperator(operator) {
     if(OperatorActive)
     {
         numA = operate(CurrentOperator, numA, numB);
+        numB = "";
         ResultBox.textContent = numA;
         DisplayBox.textContent = "";
-        numB = "";
         operatorActive = false;
     }
     else if(OperatorActive == false)
@@ -108,6 +108,7 @@ function UpdateResult() {
     DisplayBox.textContent = "";
     ResultBox.textContent = operate(CurrentOperator, numA, numB);
     numA = ResultBox.textContent;
+    numB = "";
 }
 
 function clear() {
