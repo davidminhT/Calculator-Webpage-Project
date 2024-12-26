@@ -1,12 +1,12 @@
 const ButtonBox = document.querySelector("#ButtonBox");
 const DigitBox = document.querySelector("#DigitBox");
 const DisplayBox = document.querySelector("#DisplayBox");
-const ResultBox = document.querySelector("#ResultBox")
+const LastOperationBox = document.querySelector("#LastOperationBox")
 
-var numA = "";
-var numB = "";
-var CurrentResult;
-var CurrentOperator;
+var numA = ""; //Current numA
+var numB = ""; //Current numB
+var CurrentResult = ""; //Current result
+var CurrentOperator= ""; //Current Operator
 var OperatorActive = false;
 
 //Operation
@@ -72,17 +72,15 @@ function setupDigitButtons() {
 }
 
 function UpdateDigits(num) {
-    if(OperatorActive == false)
+    if(OperatorActive == false) //standard
     {
         numA += String(num);
-        console.log(numA);
-        DisplayBox.textContent += String(num);
+        DisplayBox.textContent = numA;
     }
-    else if(OperatorActive == true)
+    else if(OperatorActive == true) //if operator is clicked
     {
         numB += String(num);
-        console.log(numB);
-        DisplayBox.textContent += String(num);
+        DisplayBox.textContent += numB;
     }
 }
 
@@ -91,23 +89,22 @@ function UpdateCurrentOperator(operator) {
     {
         numA = operate(CurrentOperator, numA, numB);
         numB = "";
-        ResultBox.textContent = numA;
-        DisplayBox.textContent = "";
+        DisplayBox.textContent = numA;
         operatorActive = false;
     }
     else if(OperatorActive == false)
     {
         OperatorActive = true;
-        DisplayBox.textContent = "";
     }
+    DisplayBox.textContent += operator;
     CurrentOperator = operator;
 }
 
 function UpdateResult() {
     OperatorActive = false;
-    DisplayBox.textContent = "";
-    ResultBox.textContent = operate(CurrentOperator, numA, numB);
-    numA = ResultBox.textContent;
+    CurrentResult = operate(CurrentOperator, numA, numB);
+    numA = CurrentResult;
+    DisplayBox.textContent = numA;
     numB = "";
 }
 
