@@ -1,7 +1,6 @@
 const DisplayBox = document.querySelector("#DisplayBox");
 const LastOperationBox = document.querySelector("#LastOperationBox")
 const ButtonsBox = document.querySelector("#ButtonsBox");
-const ClickSound = new Audio('SFX/click.wav');
 
 var numA = ""; //Current numA
 var numB = ""; //Current numB 
@@ -90,7 +89,6 @@ function setupOperatorButton(parent, operator) {
     if(operator == "=")
         Button.id = "Equal";
     Button.addEventListener("click", () => {
-        ClickSound.play();
         if("+−×÷%".includes(Button.textContent))
         {
             if(numA != "")
@@ -130,7 +128,6 @@ function setupDigitButton(parent, digit) {
 
     Button.style.color = "white";
     Button.addEventListener("click", () => {
-        ClickSound.play();
         UpdateDigits(Button.textContent); 
     });
     parent.appendChild(Button);
@@ -151,11 +148,12 @@ function UpdateDigits(num) {
 
 //Activate when an operator button is clicked
 function UpdateCurrentOperator(operator) {
+    console.log("all");
     //if the user do operation after operation, the OperatorActive is always active.
     if(OperatorActive) //Runs when user do continuous operator calls
     {
         if(numB !== "")
-        {
+        {   console.log("a")
             LastOperationBox.textContent = `${numA} ${CurrentOperator} ${numB} =`;
             numA = operate(CurrentOperator, numA, numB);
             numB = "";
@@ -165,6 +163,7 @@ function UpdateCurrentOperator(operator) {
         {
             DisplayBox.textContent = DisplayBox.textContent
                     .replace(` ${CurrentOperator} `, '');
+            OperatorActive = false;
         }
     }
     //First operator call after a "fresh state", 
@@ -206,7 +205,7 @@ function ToggleSign()
 function UpdateResult() {
     //handle case where qual opeation if user haven't entered 
     //anything after operator is activated
-    if(numB == "") 
+    if(OperatorActive && numB == "") 
         CurrentOperator = ""; 
 
     //output last successful operation
@@ -221,6 +220,7 @@ function UpdateResult() {
     numB = "";
     OperatorActive = false;
     DisplayBox.textContent = numA;
+    console.log(numA);
 }
 
 //Clear the calculator
