@@ -40,7 +40,7 @@ const operate = (operator, a, b) => {
 };
 
 //Setup the operator buttons
-const operators = ['.', '+', '−', '×', '÷', '=', 'clear']
+const operators = ['+/−', '.', '+', '−', '×', '÷', '=', 'AC']
 function setupOperatorButtons() {
     for(let operator of operators)
     {   
@@ -59,13 +59,11 @@ function setupOperatorButtons() {
                     UpdateResult();
             }
             else if(Button.textContent == ".")
-            {
                 AddDecimal();
-            }
+            else if(Button.textContent == "+/−")
+                ToggleSign();
             else
-            {
                 clear();
-            }
         });
         ButtonBox.appendChild(Button);
     }
@@ -127,6 +125,20 @@ function AddDecimal()
     else if(!(numA.includes('.'))) 
     {
         numA += '.';
+        DisplayBox.textContent = numA;
+    }
+}
+
+function ToggleSign()
+{
+    if(OperatorActive)
+    {
+        
+    }
+    //If numA previously has no decimal place then run
+    else
+    {
+        numA = -numA;
         DisplayBox.textContent = numA;
     }
 }
