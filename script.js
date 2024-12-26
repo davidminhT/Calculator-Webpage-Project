@@ -69,15 +69,25 @@ function setupOperatorButtons() {
     }
 }
 
+const digits = [
+    [7, 8, 9],
+    [4, 5, 6],
+    [1, 2, 3],
+    [0]
+];
 function setupDigitButtons() {
-    for(let i = 0; i <= 9; i++)
-    {
-        const Button = document.createElement("button");
-        Button.className = "DigitButton";
-        Button.textContent = i;
-        Button.addEventListener("click", () => UpdateDigits(Button.textContent));
-        DigitsBox.appendChild(Button);
-    }
+    digits.forEach(row => {
+        const RowDiv = document.createElement("div");
+        RowDiv.className = "RowDiv";
+        row.forEach(digits => {
+            const Button = document.createElement("button");
+            Button.className = "DigitButton";
+            Button.textContent = digits;
+            Button.addEventListener("click", () => UpdateDigits(Button.textContent));
+            RowDiv.appendChild(Button);
+        });
+        DigitsBox.appendChild(RowDiv);
+    })
 }
 
 function UpdateDigits(num) {
@@ -178,6 +188,4 @@ function clear() {
 }
 
 window.onload = () => {
-    setupOperatorButtons();
-    setupDigitButtons();
 };

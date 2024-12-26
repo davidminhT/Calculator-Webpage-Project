@@ -1,7 +1,12 @@
+
+html {
+    background-color: rgb(151, 151, 190);
+}
+
 html, body {
     height: 100%;
     overflow: hidden;
-    font-family: "Pixelify-Sans";
+    font-family: "Pixelify Sans", serif;
 }
 
 body {
@@ -14,7 +19,11 @@ body {
 #main {
     display: flex;
     flex-direction: column;
-    background-color: gray;
+    background-color: rgb(224, 224, 224);
+    border-radius: 30px;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.37), 
+                    0px 12px 0px 15px rgba(116, 103, 103, 0.863), 
+                    0px 40px 40px 20px rgba(0, 0, 0, 0.37);
     height: 65vh;
     width: 55vh;
     justify-content: space-around;
@@ -24,23 +33,11 @@ body {
 #ButtonsBox {
     display: flex;
     flex-wrap: wrap;
+    height: 90%;
+    width: 90%;
 }
 
-#OperatorsBox {
-    display: flex;
-    flex-wrap: wrap;
-    width: 75%;
-}
 
-#DigitsBox {
-    display: flex;
-    flex-wrap: wrap;
-    width: 50%;
-}
-.OperatorButton, .DigitButton {
-    height: 50px;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
+
+
