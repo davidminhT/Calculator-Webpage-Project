@@ -51,10 +51,11 @@ a {
     background-color: rgb(236, 230, 201);
     background-image: linear-gradient(to bottom, rgb(66, 62, 62) 30%,
                         rgba(0,0,0,0) 30%);
-    border-radius: 30px;
+    border-radius: 20px;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.37), 
                     inset 0px -1px 0px 12px rgba(0, 0, 0, 0.24),
-                    0px 12px 0px 10px rgba(0, 0, 0, 0.863), 
+                    0px 2px 0px 10px rgb(100 86 86 / 86%),
+                    0px 30px 0px 10px rgb(33 30 30 / 86%), 
                     0px 40px 40px 20px rgba(0, 0, 0, 0.37);
                     
     height: 65vh;
