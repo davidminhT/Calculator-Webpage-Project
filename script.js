@@ -133,7 +133,7 @@ function setupDigitButton(parent, digit) {
 
     Button.style.color = "white";
     Button.addEventListener("click", () => {
-        if(numA.length >= 5 || numB.length >= 5)
+        if(!OperatorActive && numA.length >= 5 || OperatorActive && numB.length >= 5)
             return;
         UpdateDigits(Button.textContent); 
         audio.play();
