@@ -1,7 +1,7 @@
 const DisplayBox = document.querySelector("#DisplayBox");
 const LastOperationBox = document.querySelector("#LastOperationBox")
 const ButtonsBox = document.querySelector("#ButtonsBox");
-var audio = new Audio('SFX/click.wav');
+let currentAudio = null;
 
 var numA = ""; //Current numA
 var numB = ""; //Current numB 
@@ -53,6 +53,11 @@ const operate = (operator, a, b) => {
     }
     return Number.isInteger(result) ? result : Math.round(result * 100) / 100;
 };
+
+function playAudio() {
+    currentAudio = new Audio('SFX/click.wav');
+    currentAudio.play();
+}
 
 function setupButtons() {
     const RowDivs = Array.from(ButtonsBox.querySelectorAll(".row"));
@@ -109,6 +114,7 @@ function setupOperatorButton(parent, operator) {
             ToggleSign();
         else
             clear();
+        var audio = new Audio('SFX/click.wav');
         audio.play();
     });
     parent.appendChild(Button);
@@ -136,6 +142,7 @@ function setupDigitButton(parent, digit) {
         if(!OperatorActive && numA.length >= 5 || OperatorActive && numB.length >= 5)
             return;
         UpdateDigits(Button.textContent); 
+        var audio = new Audio('SFX/click.wav');
         audio.play();
     });
     parent.appendChild(Button);
