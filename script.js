@@ -1,6 +1,7 @@
 const DisplayBox = document.querySelector("#DisplayBox");
 const LastOperationBox = document.querySelector("#LastOperationBox")
 const ButtonsBox = document.querySelector("#ButtonsBox");
+var audio = new Audio('SFX/click.wav');
 
 var numA = ""; //Current numA
 var numB = ""; //Current numB 
@@ -43,6 +44,8 @@ const operate = (operator, a, b) => {
             break;
         case '÷':
             result = divide(a, b);
+            if(result === Infinity)
+                result = "error";
             break;
         case '%':
             result = modulo(a, b);
@@ -106,6 +109,7 @@ function setupOperatorButton(parent, operator) {
             ToggleSign();
         else
             clear();
+        audio.play();
     });
     parent.appendChild(Button);
 }
@@ -129,7 +133,10 @@ function setupDigitButton(parent, digit) {
 
     Button.style.color = "white";
     Button.addEventListener("click", () => {
+        if(numA.length >= 5 || numB.length >= 5)
+            return;
         UpdateDigits(Button.textContent); 
+        audio.play();
     });
     parent.appendChild(Button);
 }
