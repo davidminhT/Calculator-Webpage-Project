@@ -55,9 +55,9 @@ a {
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.37), 
                     inset 0px -1px 0px 12px rgba(0, 0, 0, 0.24),
                     0px 2px 0px 10px rgb(100 86 86 / 86%),
-                    0px 30px 0px 10px rgb(33 30 30 / 86%), 
-                    0px 40px 40px 20px rgba(0, 0, 0, 0.37);
-                    
+                    0px 43px 0px 10px rgb(33 30 30 / 86%), 
+                    0px 40px 20px 30px rgba(0, 0, 0, 0.041),
+                    0px 85px 20px 10px rgba(41, 46, 49, 0.527);
     height: 65vh;
     width: 55vh;
     min-width: 500px;
